@@ -1,0 +1,33 @@
+.cabinet {
+    float: left;
+    display:flex;
+    width: 30rem;
+    margin: 5rem;
+}
+
+.btnTapList > ul {
+    list-style-type: none;
+    background-color: rgb(198, 236, 190);
+    display: flex;
+    width: 80rem;
+}
+
+.btnTapList {
+float: right;
+}
+
+
+.btnTap {
+    background-color: rgb(198, 236, 0);
+    border: 1px solid black;
+    font-size: 20px;
+    text-align: center;
+    width: 25rem;
+    margin: 3rem;
+}
+
+.contentBox {
+    background-color: rgb(224, 190, 255);
+    width: 80rem;
+    float: right;
+}
