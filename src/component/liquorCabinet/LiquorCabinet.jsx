@@ -27,7 +27,8 @@ export const LiquorCabinet = ({ allIngredient, setAllIngredient, allRecipe, setA
 
     const firstPage = <AllIncluded/>;
     const secondPage = <MostIncluded allRecipe={allRecipe} ingredient={ingredient} setIngredient={setIngredient} 
-    allRecipeIng={allRecipeIng} setAllRecipeIng={setAllRecipeIng} />;
+    allRecipeIng={allRecipeIng} setAllRecipeIng={setAllRecipeIng}
+    history = {history}  setHistory = {setHistory} />;
     const thirdPage = <History history = {history}  setHistory = {setHistory} />;
 
     return (
@@ -44,7 +45,7 @@ export const LiquorCabinet = ({ allIngredient, setAllIngredient, allRecipe, setA
                 </ul>
             </div>
             <div className={styles.contentBox}>
-                내용
+                
                 {(page === 1 ) ? firstPage : 
                     (page === 2) ? secondPage : thirdPage} 
             </div>

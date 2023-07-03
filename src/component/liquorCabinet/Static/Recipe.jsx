@@ -3,7 +3,7 @@ import axios from "axios";
 import styles from "./Recipe.module.css";
 import React from 'react';
 
-export const Recipe = ({ allRecipe, allRecipeIng, priorityNumber, recommendedRecipe, ingredient }) => {
+export const Recipe = ({ allRecipe, allRecipeIng, priorityNumber, recommendedRecipe, ingredient, history, setHistory }) => {
 
 
     //recommendedRecipe[priorityNumber][0]는 이 컴포넌트가 받은 레시피 번호
@@ -21,13 +21,36 @@ export const Recipe = ({ allRecipe, allRecipeIng, priorityNumber, recommendedRec
 
     const user_id = "master";
 
+    let today = new Date();
+
+    let year = today.getFullYear();
+    let month = ('0' + (today.getMonth() + 1)).slice(-2);
+    let day = ('0' + today.getDate()).slice(-2);
+    let hours = ('0' + today.getHours()).slice(-2);
+    let minutes = ('0' + today.getMinutes()).slice(-2);
+    let seconds = ('0' + today.getSeconds()).slice(-2);
+
+    let timeString = year + '-' + month + '-' + day + " " + hours + ':' + minutes + ':' + seconds;
+
+    console.log(timeString);
+
     const addHistory = () => {
+
+        //setHistory
+        const newHistory = {
+            user_id: user_id, cocktail_name: allRecipe[recipeIndex].cocktail_name, img_path: allRecipe[recipeIndex].img_path, createdAt: timeString
+        }
+
+        setHistory([newHistory, ...history])
+
+        console.log(history)
+
         //DB에 넣기
         if (user_id !== null) {
             axios({
                 url: "/api/historyAdd",
                 method: 'post',
-                data: { user_id: user_id, cocktail_name: allRecipe[recipeIndex].cocktail_name, img_path: allRecipe[recipeIndex].img_path }
+                data: { user_id: user_id, cocktail_name: allRecipe[recipeIndex].cocktail_name, img_path: allRecipe[recipeIndex].img_path, createdAt: timeString }
             })
                 .then(function a(response) {
                     console.log(response)

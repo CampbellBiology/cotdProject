@@ -28,7 +28,6 @@ export const History = ({ history, setHistory }) => {
 
     return (
         <>
-            <div>히스토리</div>
 
             {/* dayList만큼 반복 */}
             {dayList.map((item, i) => {

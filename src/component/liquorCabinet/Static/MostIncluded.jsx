@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { Recipe } from "./Recipe";
 
 
-export const MostIncluded = ({ allRecipe, ingredient, allRecipeIng, setAllRecipeIng }) => {
+export const MostIncluded = ({ allRecipe, ingredient, allRecipeIng, setAllRecipeIng, history, setHistory}) => {
 
 
     const [filteredItems, setFilteredItems] = useState([]);
@@ -91,7 +91,8 @@ export const MostIncluded = ({ allRecipe, ingredient, allRecipeIng, setAllRecipe
 
                     <Recipe allRecipe = {allRecipe} priorityNumber={i}  key={i} 
                       recommendedRecipe={recommendedRecipe}
-                     allRecipeIng={allRecipeIng} ingredient = {ingredient}/>
+                     allRecipeIng={allRecipeIng} ingredient = {ingredient}
+                     history = {history}  setHistory = {setHistory}/>
                 )
             }
             )}

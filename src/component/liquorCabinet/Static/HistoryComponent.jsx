@@ -25,13 +25,17 @@ export const HistoryComponent = ({ history, dayList, historyNum }) => {
     return (
         <div className={styles.HistoryComponent}>
             날짜 : {day}
-            내용: {
+            <div className={styles.blank}></div>
+            {
                 filtered.map((item, i) => {
 
                     return <div key={i}>
+                        
+                        <div>{i + 1}번째 잔: {filtered[i].cocktail_name}</div>
                         <div>사진: <img src={filtered[i].img_path} className={styles.photo} alt={filtered[i].cocktail_name}></img></div>
-                        <div>{i}번째 잔: {filtered[i].cocktail_name}</div>
+                        <div>먹은 시간: {filtered[i].createdAt}</div>
                         <button> 삭제 </button>
+                        <div className={styles.blank}></div>
                     </div>
                 })
             }

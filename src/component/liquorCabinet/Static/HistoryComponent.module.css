@@ -1,4 +1,8 @@
 .photo {
-    width: 30px;
-    height: 30px;
+    width: 5rem;
+    height: 5rem;
+}
+
+.blank {
+    height: 50px;
 }
