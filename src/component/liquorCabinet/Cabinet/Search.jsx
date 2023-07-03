@@ -157,18 +157,21 @@ export const Search = ({ ingredient, setIngredient, allIngredient, setAllIngredi
     }
 
 
+
     //onKeyUp일 때
     const onSubmitSearch = (e) => {
         keyword = (e.target.value);
         if (e.key === "Enter") {
             if (keyword === null || keyword === "" || keyword === '' || keyword === undefined) {
+               
                 alert("검색어를 입력해 주세요.")
                 return;
-            }
+            } 
 
             setHasText(false);
             setInputValue('');
-            addItem(keyword);
+            addItem(options[0]);
+            //addItem(keyword);
             //keyword = '';
 
         }
