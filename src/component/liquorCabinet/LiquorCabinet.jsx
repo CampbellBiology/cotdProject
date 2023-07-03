@@ -1,10 +1,11 @@
 
 import styles from "./LiquorCabinet.module.css";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Cabinet } from "./Cabinet/Cabinet"
 import { AllIncluded } from "./Static/AllIncluded"
 import { MostIncluded } from "./Static/MostIncluded"
 import { History } from "./Static/History"
+import axios from "axios";
 
 
 export const LiquorCabinet = ({ allIngredient, setAllIngredient, allRecipe, setAllRecipe, ingredient, setIngredient,
@@ -12,11 +13,22 @@ export const LiquorCabinet = ({ allIngredient, setAllIngredient, allRecipe, setA
 
     const [page, setPage] = useState(1);
 
+    
+  //히스토리
+  const [history, setHistory] = useState([]);
+
+  useEffect(() => {
+    axios.get("/api/getHistory").then((data) => {
+      //history에 담기
+      setHistory(data.data);
+    });
+  }, []);
+
 
     const firstPage = <AllIncluded/>;
     const secondPage = <MostIncluded allRecipe={allRecipe} ingredient={ingredient} setIngredient={setIngredient} 
     allRecipeIng={allRecipeIng} setAllRecipeIng={setAllRecipeIng} />;
-    const thirdPage = <History />;
+    const thirdPage = <History history = {history}  setHistory = {setHistory} />;
 
     return (
         <>

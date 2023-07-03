@@ -73,17 +73,6 @@ function App() {
     }
   }, [setIngredient]);
 
-  //히스토리
-  const [history, setHistory] = useState([]);
-
-  useEffect(() => {
-    axios.get("/api/getHistory").then((data) => {
-      //history에 담기
-      setHistory(data.data);
-    });
-  }, []);
-
-  console.log(history)
 
   return (
     <div className="App">
