@@ -1,23 +1,29 @@
 
 import styles from "./HistoryComponent.module.css";
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 
 
-export const HistoryComponent = ({ history, dayList, historyNum }) => {
+export const HistoryComponent = ({ history, dayList, historyNum, deleteHistory, deleteHistoryDB }) => {
 
     const day = dayList[historyNum]
-    const [filtered, setFiltered] = useState([]);
 
-    //날짜별 분류, day에 해당하는 history만 남음
-        const filteredItem = history.filter((item) =>
-            item.createdAt.split(" ")[0] === day
-        )
+    // const [filtered, setFiltered] = useState([]);
 
-    useEffect(() => {
-        setFiltered(...filtered, filteredItem)
+    // //날짜별 분류, day에 해당하는 history만 남음
+    //     const filteredItem = history.filter((item) =>
+    //         item.createdAt.split(" ")[0] === day
+    //     )
 
-    }, [day, history, setFiltered]);
+    // useEffect(() => {
+    //     setFiltered(...filtered, filteredItem)
+
+    // }, [day, history, setFiltered]);
+
+    //console.log(filtered)
+
+    const filtered = history.filter((item) =>
+        item.createdAt.split(" ")[0] === day)
 
     console.log(filtered)
 
@@ -30,11 +36,11 @@ export const HistoryComponent = ({ history, dayList, historyNum }) => {
                 filtered.map((item, i) => {
 
                     return <div key={i}>
-                        
-                        <div>{i + 1}번째 잔: {filtered[i].cocktail_name}</div>
-                        <div>사진: <img src={filtered[i].img_path} className={styles.photo} alt={filtered[i].cocktail_name}></img></div>
-                        <div>먹은 시간: {filtered[i].createdAt}</div>
-                        <button> 삭제 </button>
+
+                        <div>{i + 1}번째 잔: {item.cocktail_name}</div>
+                        <div>사진: <img src={item.img_path} className={styles.photo} alt={item.cocktail_name}></img></div>
+                        <div>먹은 시간: {item.createdAt}</div>
+                        <button onClick={() => { deleteHistory(item.createdAt); deleteHistoryDB(item.createdAt); }}> 삭제 </button>
                         <div className={styles.blank}></div>
                     </div>
                 })

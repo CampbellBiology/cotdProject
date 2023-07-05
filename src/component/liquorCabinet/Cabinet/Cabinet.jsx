@@ -3,12 +3,15 @@
 import styles from "../Cabinet/Cabinet.module.css";
 import React from 'react';
 import axios from 'axios';
-import { Search } from "./Search"
+import { SearchBox } from "./SearchBox"
 import { Item } from "./Item"
 
-export const Cabinet = ({ allIngredient, setAllIngredient , ingredient, setIngredient}) => {
+export const Cabinet = ({ allIngredient, setAllIngredient, ingredient, setIngredient }) => {
 
- // const [ingredient, setIngredient] = useState([]);
+  // const [ingredient, setIngredient] = useState([]);
+
+
+
   const user_id = "master";
 
 
@@ -36,20 +39,18 @@ export const Cabinet = ({ allIngredient, setAllIngredient , ingredient, setIngre
   }
 
 
-
   return (
     <div className={styles.case}>
-      <Search ingredient={ingredient} setIngredient = {setIngredient} allIngredient={allIngredient} setAllIngredient={setAllIngredient}/>
-      {/* <button onClick={() => { addItem()} }>추가</button> */}
+      <SearchBox ingredient={ingredient} setIngredient={setIngredient} allIngredient={allIngredient} setAllIngredient={setAllIngredient} />
 
-      {/* 추가될 때마다 key(i)도 계속 늘어남 */}
-      {ingredient.map((item, i) => {
-        return (
+      <div className = {styles.ingredient}>{
+      ingredient.length === 0 ? <div>재료가 없네요</div> : <div>{ingredient.map((item, i) => {
+          return (
+            <Item ingredient={item} setIngredient={setIngredient} ingNum={i} deleteItem={deleteItem} deleteItemDB={deleteItemDB} key={i} />
+          )
+        })}</div>
+      }</div>
 
-          <Item ingredient={item} setIngredient={setIngredient} ingNum={i} deleteItem={deleteItem} deleteItemDB={deleteItemDB} key={i} />
-)
-      }
-      )}
     </div>
   );
 };
