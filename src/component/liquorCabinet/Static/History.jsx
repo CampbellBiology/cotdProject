@@ -5,8 +5,6 @@ import { HistoryComponent } from "./HistoryComponent"
 import axios from 'axios';
 
 
-
-
 export const History = ({ history, setHistory }) => {
 
     const user_id = "master"
@@ -53,23 +51,14 @@ export const History = ({ history, setHistory }) => {
         }
     }
 
-
-
-
-
-
-
-
-
     return (
-        <>
 
-            {/* dayList만큼 반복 */}
-            {dayList.map((item, i) => {
+        <div> {
+            history.length === 0 ? <div>히스토리가 없네요</div> : <div> {dayList.map((item, i) => {
                 return (<HistoryComponent history={history} dayList={dayList} historyNum={i}
                     deleteHistory={deleteHistory} deleteHistoryDB={deleteHistoryDB} key={i} />)
-            })}
+            })}</div>
+        }</div>
 
-        </>
     )
 };

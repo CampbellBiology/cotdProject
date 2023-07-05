@@ -66,29 +66,19 @@ const AutoSearchData = styled.li`
 
 
 export const SearchBox = ({ ingredient, setIngredient, allIngredient, setAllIngredient }) => {
-    //let keyword;
-    //let imgPath ="안녕"
-    const user_id  = "master"
+  //let keyword;
+  //let imgPath ="안녕"
+  const user_id = "master"
 
-    // const [allIngredient, setAllIngredient] = useState([]);
-    const [autoChk, setAutoChk] = useState(false);
+  const [autoChk, setAutoChk] = useState(false);
 
-    const deselectedOptions = [];
+  const deselectedOptions = [];
 
-    //Object.keys 주어진 객체의 속성 이름들을 일반적인 반복문과 동일한 순서로 순회되는 열거할 수 있는 배열로 반환함
-    //배열의 key값만 가져와서 배열로 만듦
-    for (const key in Object.keys(allIngredient)) {
-        deselectedOptions[key] = (allIngredient[key].ingredient_name);
-    }
-
-    // input에 입력값이 존재하는지 확인하는 용도
-    //const [hasText, setHasText] = useState(false);
-
-    // 입력 받은 input값을 저장하는 용도
-   // const [inputValue, setInputValue] = useState('');
-
-    // 자동완성으로 보여줄 값들을 저장하는 용도
-    //const [options, setOptions] = useState(deselectedOptions);
+  //Object.keys 주어진 객체의 속성 이름들을 일반적인 반복문과 동일한 순서로 순회되는 열거할 수 있는 배열로 반환함
+  //배열의 key값만 가져와서 배열로 만듦
+  for (const key in Object.keys(allIngredient)) {
+    deselectedOptions[key] = (allIngredient[key].ingredient_name);
+  }
 
 
   // 각종 useState 친구들 선언해요
@@ -103,159 +93,101 @@ export const SearchBox = ({ ingredient, setIngredient, allIngredient, setAllIngr
 
 
 
-    // useEffect(() => {
-
-    //     if (inputValue === '') {
-    //         //setHasText(false);
-    //         //setOptions([]);
-    //     } else {
-    //         setOptions(deselectedOptions.filter((option) => {
-    //             return option.includes(inputValue);
-    //         }))
-    //     }
-    //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, [inputValue]);
-    // input을 입력할 때마다, input을 포함(includes)한 요소들만 모아 options 배열 업데이트
-
-
-    // input의 onChange 이벤트 때, 입력값을 inputValue에 저장하고 hasText값 갱신
-    const handleInputChange = (e) => {
-        //setInputValue(e.target.value);
-       // setHasText(true);
-        setKeyword(e.currentTarget.value);
+  // input의 onChange 이벤트 때, 입력값을 inputValue에 저장하고 hasText값 갱신
+  const handleInputChange = (e) => {
+    setKeyword(e.currentTarget.value);
     setIsTyping(true); // 타이핑 상태를 true로 설정
-    };
-
-
-    // 보여지는 자동완성 값 중 하나를 클릭하면 해당 값이 input에 할당
-    // const handleDropDownClick = (clickedOption) => {
-    //     setInputValue([clickedOption]);
-    //     setKeyword(clickedOption)
-    //     //keyword = clickedOption;
-    //     setHasText(false);
-
-    //     setInputValue('');
-    //     setKeyword('')
-    //     //keyword = '';
-
-    //     addItem(keyword)
-
-    // };
-
-
-    // const findImage = (selectedItemName) => {
-
-    //     //자동완성에서 선택한 clickedOption(selectedItemName)과 같은 이름으로 filter해서 imgpath반환
-    //     const result = allIngredient.filter((el) => el.ingredient_name === selectedItemName);
-    //     imgPath = result.img_path;
-
-    //     return imgPath
-    // };
-
-        //동기화 적용시킴
-        const findImage = async (selectedItemName) => {
-          const result = allIngredient.filter((el) => el.ingredient_name === selectedItemName);
-          const image = result[0] ? result[0].img_path : '';
-        
-          return image;
-        };
-    
+  }
 
 
 
-    //addItem함수
-    //clickedOption은 전체 아이템 중 선택한 아이템의 ingredient_name
-    const addItem = async(keyword) => {
+  //동기화 적용시킴
+  const findImage = async (selectedItemName) => {
+    const result = allIngredient.filter((el) => el.ingredient_name === selectedItemName);
+    const image = result[0] ? result[0].img_path : '';
 
-        //기존 술장 목록과 선택한 아이템의 이름을 비교
-        const result = ingredient.filter((el) => el.ingredient_name === keyword);
-
-        //같은 게 없으면addItem
-        if(result[0] == null) {
-        
-        
-            //더해줄 item
-            //item의 이름은 선택한 inputvalue이고, img는 전체 목록에서 filter로 찾음(findImage함수)
-        const image =  await findImage(keyword)
-        const addingItem = {
-            ingredient_name: keyword,
-            img_path: image
-        };
-
-        //item add해주기
-        // 깊은 복사하고(...ingredient) 새로 넣어주기
-        setIngredient([...ingredient, addingItem])
-        //setHasText(false);
-        console.log(addingItem)
+    return image;
+  };
 
 
-        //DB에 넣기
-            if (user_id !== null && result[0] == null) {
-              axios({
-                url: "/api/itemAdd",
-                method: 'post',
-                data:  { user_id: user_id, ingredient_name: keyword }
-              })
-                .then(function a(response) {
-                  console.log(response)
-                })
-                .catch(function (error) {
-                  console.log(error);
-                });
-            }
-        } else {alert("중복된 재료입니다.")}
+  //addItem함수
+  //clickedOption은 전체 아이템 중 선택한 아이템의 ingredient_name
+  const addItem = async (keyword) => {
 
-        console.log(result)
+    //기존 술장 목록과 선택한 아이템의 이름을 비교
+    const result = ingredient.filter((el) => el.ingredient_name === keyword);
 
+    //같은 게 없으면addItem
+    if (result[0] == null) {
+
+
+      //더해줄 item
+      //item의 이름은 선택한 inputvalue이고, img는 전체 목록에서 filter로 찾음(findImage함수)
+      const image = await findImage(keyword)
+      const addingItem = {
+        ingredient_name: keyword,
+        img_path: image
+      };
+
+      //item add해주기
+      // 깊은 복사하고(...ingredient) 새로 넣어주기
+      setIngredient([...ingredient, addingItem])
+      console.log(addingItem)
+
+
+      //DB에 넣기
+      if (user_id !== null && result[0] == null) {
+        axios({
+          url: "/api/itemAdd",
+          method: 'post',
+          data: { user_id: user_id, ingredient_name: keyword }
+        })
+          .then(function a(response) {
+            console.log(response)
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
+    } else { alert("중복된 재료입니다.") }
+
+    console.log(result)
+
+  }
+
+
+  //onFocus, onBlur일 때  
+  const autoSearch = () => {
+    if (autoChk === true) {
+      setAutoChk(false);
+      return;
     }
-
-
-    // 삭제 버튼을 누르면, inputValue를 초기화
-    // const handleDeleteButtonClick = () => {
-    //     setInputValue('');
-    //     setKeyword('')
-    //     //keyword = '';
-
-    // };
-
-
-    //onFocus, onBlur일 때  
-    const autoSearch = () => {
-        if (autoChk === true) {
-            setAutoChk(false);
-            return;
-        }
-        setAutoChk(true);
-    }
+    setAutoChk(true);
+  }
 
 
 
-    //onKeyUp일 때
-    const onSubmitSearch = (e) => {
-        setKeyword(e.target.value)
-        //keyword = (e.target.value);
-        if (e.key === "Enter") {
+  //onKeyUp일 때
+  // const onSubmitSearch = (e) => {
+  //   setKeyword(e.target.value)
+  //   //keyword = (e.target.value);
+  //   if (e.key === "Enter") {
 
-            if ( keyword === null || keyword === "" || keyword === '' || keyword === undefined) {
-               
-                alert("검색어를 입력해 주세요.")
-                return;
-            } else {
-              setKeyword(keyItems[0].ingredient_name);
-              setKeyItems([]);
-              setIndex(-1);
-              addItem(keyItems[0].ingredient_name);
-              //setHasText(false);
-             //setInputValue('');
-              setKeyword('');
-            }
+  //     if (keyItems.length !== 0) {
+  //       setKeyword(keyItems[0].ingredient_name);
+  //       setKeyItems([]);
+  //       setIndex(-1);
+  //       addItem(keyItems[0].ingredient_name);
+  //       setKeyword('');
+  //     }
+  //   }
+  // }
 
-        }
-    };
+  console.log('인덱스' + index)
 
-
-    // 화살표 키 이벤트 처리 함수
+  // 화살표 키 이벤트 처리 함수
   const handleKeyArrow = (e) => {
+    //콤보박스 자동 완성 결과가 있을 때 keyItems.length > 0
     if (keyItems.length > 0) {
       switch (e.key) {
         //하단 방향키를 누르면 해당 인덱스에서 prevIndex +1 에서 배열 길이로 나눈 나머지를 setIndex로 스테이트를 변경해요
@@ -267,20 +199,28 @@ export const SearchBox = ({ ingredient, setIngredient, allIngredient, setAllIngr
             prevIndex === 0 ? keyItems.length - 1 : prevIndex - 1
           );
           break;
-           //esc키를 누르면 setKeyItems으로 초기화 해줘요
+        //esc키를 누르면 setKeyItems으로 초기화 해줘요
         case 'Escape':
           setKeyItems([]);
           setIndex(-1);
           break;
-              //enter키를 누르면 setKeyItems으로 초기화 하고 keyItems[index].ingredient_name을 인풋창에 띄워요
+        //enter키를 누르면 setKeyItems으로 초기화 하고 keyItems[index].ingredient_name을 인풋창에 띄워요
         case 'Enter':
           if (index !== -1) {
-            setKeyword(keyItems[index].ingredient_name);
+
+            if (keyword !== null || keyword !== "" || keyword !== '' || keyword !== undefined) {
+              setKeyword(keyItems[index].ingredient_name);
+              setKeyItems([]);
+              setIndex(-1);
+              addItem(keyItems[index].ingredient_name);
+              setKeyword('');
+            } 
+
+          } else {
+            setKeyword(keyItems[0].ingredient_name);
             setKeyItems([]);
             setIndex(-1);
-            addItem(keyItems[index].ingredient_name);
-           // setHasText(false);
-            //setInputValue('');
+            addItem(keyItems[0].ingredient_name);
             setKeyword('');
           }
           break;
@@ -288,23 +228,31 @@ export const SearchBox = ({ ingredient, setIngredient, allIngredient, setAllIngr
           // 디폴트 키입력은 없어요
           break;
       }
+    } 
+    //자동 완성 결과가 생기기 전에
+    else if (e.key === 'Enter') {
+      if (keyword === null || keyword === "" || keyword === '' || keyword === undefined) {
+        alert('입력된 값이 없다')
+      } else {
+        alert('검색 결과가 없어요')
+      }
     }
   };
 
-// 데이터 업데이트 함수
-const updateData = async () => {
+  // 데이터 업데이트 함수
+  const updateData = async () => {
 
 
     //allIngredient를 인풋창 value로 필터해요
     const res = await allIngredient;
-    const filteredData = res.filter((item) =>       
-      (item.ingredient_name.replace(" ","")).includes(keyword.replace(" ",""))
+    const filteredData = res.filter((item) =>
+      (item.ingredient_name.replace(" ", "")).includes(keyword.replace(" ", ""))
     );
 
-      //10개까지만 보여줘요
+    //10개까지만 보여줘요
     const slicedData = filteredData.slice(0, 10);
     //길이순 정렬 ex) 체리, 체리 리큐르, 마라스키노 체리
-    const lengthArr = slicedData.sort((x,y)=>x.ingredient_name.length-y.ingredient_name.length)
+    const lengthArr = slicedData.sort((x, y) => x.ingredient_name.length - y.ingredient_name.length)
     //console.log(lengthArr)
 
     setKeyItems(lengthArr);
@@ -328,16 +276,15 @@ const updateData = async () => {
 
 
 
-    return (
-      <SearchContainer 
+  return (
+    <SearchContainer
       id={styles.search}
       onFocus={autoSearch}
       onBlur={autoSearch}>
 
       <Search
-      placeholder="가지고 있는 재료를 등록해주세요!"
+        placeholder="가지고 있는 재료를 등록해주세요!"
         value={keyword}
-        onKeyUp={onSubmitSearch}
         onChange={handleInputChange}
         onKeyDown={handleKeyArrow}
       />
@@ -353,10 +300,10 @@ const updateData = async () => {
                   setKeyword(search.ingredient_name);
                   setKeyItems([]);
                   setIndex(-1);
-                 // setHasText(false);
+                  // setHasText(false);
                   // addItem(options[0]);
                   addItem(search.ingredient_name);
-                 // setInputValue('');
+                  // setInputValue('');
                   setKeyword('');
                 }}
               >
@@ -368,6 +315,6 @@ const updateData = async () => {
         </AutoSearchContainer>
       )}
     </SearchContainer>
-    );
+  );
 
 };
