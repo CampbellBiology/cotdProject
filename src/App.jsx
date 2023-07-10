@@ -15,8 +15,6 @@ function App() {
 
   const user_id = "master";
 
-  const [testWord, setTestWord] = useState(1);
-
   //모든 재료 가져오기
   const [allIngredient, setAllIngredient] = useState([]);
 
@@ -48,7 +46,7 @@ function App() {
     });
   }, []);
 
-  //console.log(allRecipeIng)
+  console.log(allRecipeIng)
 
 
 
@@ -76,24 +74,28 @@ function App() {
 
   return (
     <div className="App">
-      <div id='text'>
-        테스트를 시작합니다
-      </div>
+
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Main testWord={testWord} setTestWord={setTestWord} />} />
-          <Route path="/test1" element={<Test1 />} />
+          <Route path="/" element={<Main 
+                        allIngredient={allIngredient} setAllIngredient={setAllIngredient}
+                        allRecipe={allRecipe} setAllRecipe={setAllRecipe}
+                        ingredient={ingredient} setIngredient={setIngredient}
+                        allRecipeIng={allRecipeIng} setAllRecipeIng={setAllRecipeIng}/>} />
+          <Route path="/test1" element={<Test1 allIngredient={allIngredient} setAllIngredient={setAllIngredient}
+            allRecipe={allRecipe} setAllRecipe={setAllRecipe}
+            ingredient={ingredient} setIngredient={setIngredient} />} />
           <Route path="/test2" element={<Test2 />} />
-          <Route path="/test3" element={<Test3 testWord={testWord} setTestWord={setTestWord} />} />
-          <Route path="/test4" element={<Test4 testWord={testWord} setTestWord={setTestWord} />} />
+          <Route path="/test3" element={<Test3 />} />
+          <Route path="/test4" element={<Test4 />} />
           <Route path="/liquorCabinet" element={
             <LiquorCabinet
               allIngredient={allIngredient} setAllIngredient={setAllIngredient}
               allRecipe={allRecipe} setAllRecipe={setAllRecipe}
-              ingredient={ingredient} setIngredient={setIngredient} 
-              allRecipeIng = {allRecipeIng} setAllRecipeIng = {setAllRecipeIng}
-              />}/>
-               
+              ingredient={ingredient} setIngredient={setIngredient}
+              allRecipeIng={allRecipeIng} setAllRecipeIng={setAllRecipeIng}
+            />} />
+
         </Routes>
       </BrowserRouter>
     </div>

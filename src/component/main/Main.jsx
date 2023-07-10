@@ -2,54 +2,80 @@
 import styles from "./Main.module.css";
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { MainRecipe } from './MainRecipe';
+import { Recipe } from '../recipe/Recipe';
 
 
-export const Main = ({ testWord, setTestWord }) => {
+export const Main = ({ allIngredient, setAllIngredient, allRecipe , setAllRecipe, ingredient, setIngredient, allRecipeIng, setAllRecipeIng }) => {
+
+
+
 
 
   const navigate = useNavigate();
 
-  const changeState = () => {
-
-    setTestWord(testWord+1)
-  }
 
   return (
     <>
-      <div>
-        <button id={styles.test1} onClick={()=>{navigate('/test1')}}>
-          클릭! 1
-        </button>
+
+
+      <div className={styles.sign}>
+        <span>로그인</span>
+        <span> ㅣ </span>
+        <span>회원가입</span>
       </div>
-      <div>
-        <button id={styles.test2} onClick={()=>{navigate('/test2')}}>
-          클릭! 2
-        </button>
+
+      <div className={styles.header}>
+        <div className={styles.logo}>
+          <img src="/logo.png" alt="logo" />
+        </div>
+
+        <div className={styles.search}>
+          <input placeholder='칵테일 또는 재료를 검색하세요' className={styles.searchBar}>
+          </input>
+        </div>
       </div>
-      <div>
-        <button id={styles.test3} onClick={()=>{navigate('/test3')}}>
-          클릭! 3
-        </button>
-      </div>
-      <div>
-        <button id={styles.test4}  onClick={()=>{navigate('/test4')}}>
-          클릭! 4
-        </button>
+
+
+      <div className={styles.flexBox}>
+        <div className={styles.recipeBtn}>
+          <img src="/1.png" alt="recipe" />
+        </div>
+
+        <div className={styles.wikiBtn}>
+          <img src="/2.png" alt="wiki" />
+        </div>
+
+        <div className={styles.cabinetBtn}  onClick={()=>{navigate('/liquorCabinet')}}>
+          <img src="/3.png" alt="cabinet" />
+        </div>
+
+        <div className={styles.infoBtn}>
+          <img src="/4.png" alt="info" />
+        </div>
+
       </div>
 
       <div>
-        <button id={styles.test5}  onClick={()=>{navigate('/liquorCabinet')}}>
-          내 술장
-        </button>
+        레시피 검색!
       </div>
 
-      
-      <button onClick={() => { changeState() }}>
-        스테이트 갱신
-      </button>
       <div>
-        스테이트 : {testWord}
+        <Recipe allIngredient={allIngredient} setAllIngredient={setAllIngredient}
+                        allRecipe={allRecipe} setAllRecipe={setAllRecipe}
+                        ingredient={ingredient} setIngredient={setIngredient}
+                        allRecipeIng={allRecipeIng} setAllRecipeIng={setAllRecipeIng} />
       </div>
+
+
+
+      <div className={styles.flex_wrap}>
+        {allRecipe.map((item) => {
+          return (<MainRecipe recipe={item} key={item.recipe_index} allRecipe={allRecipe} setAllRecipe={setAllRecipe} />)
+        }
+        )}
+      </div>
+
 
     </>
   );

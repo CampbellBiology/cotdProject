@@ -62,7 +62,7 @@ export const Recipe = ({ allRecipe, allRecipeIng, priorityNumber, recommendedRec
         }
     }
 
-
+console.log(allRecipe)
 
     return (
         <div className={styles.background}>
