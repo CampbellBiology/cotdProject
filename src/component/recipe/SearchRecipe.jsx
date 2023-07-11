@@ -2,12 +2,12 @@
 import styles from "./SearchRecipe.module.css";
 import React, { useRef, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Item } from '../recipe/Item';
+import { Tag } from './Tag';
 
 
 
 const SearchContainer = styled.div`
-  width: 1000px;
+  width: 1060px;
   height: 45px;
   position: relative;
   border: 0;
@@ -95,7 +95,7 @@ const AutoSearchData = styled.li`
 
 
 
-export const SearchRecipe = ({ allRecipe, setAllRecipe, allRecipeIng, setAllRecipeIng, searchTag, setSearchTag, allIngredient, setAllIngredient, deleteItem }) => {
+export const SearchRecipe = ({ allRecipe, setAllRecipe, allRecipeIng, setAllRecipeIng, searchTag, setSearchTag, allIngredient, setAllIngredient, deleteItem, recipeList, setRecipeList, TmpRecipeList }) => {
     //let keyword;
     //let imgPath ="안녕"
     //const user_id = "master"
@@ -163,6 +163,7 @@ export const SearchRecipe = ({ allRecipe, setAllRecipe, allRecipeIng, setAllReci
             //item add해주기
             // 깊은 복사하고(...ingredient) 새로 넣어주기
             setSearchTag([...searchTag, addingItem])
+            TmpRecipeList();
             console.log(addingItem)
 
 
@@ -307,7 +308,6 @@ export const SearchRecipe = ({ allRecipe, setAllRecipe, allRecipeIng, setAllReci
     }, [keyword, isTyping]);
 
 
-
     return (
         <SearchContainer
             id={styles.search}
@@ -321,7 +321,7 @@ export const SearchRecipe = ({ allRecipe, setAllRecipe, allRecipeIng, setAllReci
                 <SearchTagContainer>
                     {searchTag.map((item, i) => {
                         return (
-                            <Item searchTag={item} setSearchTag={setSearchTag} recipeNum={i} deleteItem={deleteItem} key={i} />
+                            <Tag searchTag={item} setSearchTag={setSearchTag} recipeNum={i} deleteItem={deleteItem} key={i} />
                         )
                     })}
                 </SearchTagContainer>
@@ -348,6 +348,7 @@ export const SearchRecipe = ({ allRecipe, setAllRecipe, allRecipeIng, setAllReci
                                     // setHasText(false);
                                     // addItem(options[0]);
                                     addItem(search.ingredient_name);
+                                    //tmpRecipeList();
                                     // setInputValue('');
                                     setKeyword('');
                                 }}

@@ -1,9 +1,9 @@
 
-import styles from "../recipe/Item.module.css";
+import styles from "./Tag.module.css";
 import React from 'react';
 
 
-export const Item = ({ searchTag, setSearchTag, recipeNum, deleteItem, deleteItemDB }) => {
+export const Tag = ({ searchTag, setSearchTag, recipeNum, deleteItem, deleteItemDB }) => {
 
 
     return (

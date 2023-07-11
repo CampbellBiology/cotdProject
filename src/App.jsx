@@ -1,7 +1,7 @@
 
 import './App.css';
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { Main } from './component/main/Main';
 import { Test1 } from './component/test1/Test1';
 import { Test2 } from './component/test2/Test2';
@@ -75,29 +75,30 @@ function App() {
   return (
     <div className="App">
 
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Main 
-                        allIngredient={allIngredient} setAllIngredient={setAllIngredient}
-                        allRecipe={allRecipe} setAllRecipe={setAllRecipe}
-                        ingredient={ingredient} setIngredient={setIngredient}
-                        allRecipeIng={allRecipeIng} setAllRecipeIng={setAllRecipeIng}/>} />
-          <Route path="/test1" element={<Test1 allIngredient={allIngredient} setAllIngredient={setAllIngredient}
-            allRecipe={allRecipe} setAllRecipe={setAllRecipe}
-            ingredient={ingredient} setIngredient={setIngredient} />} />
-          <Route path="/test2" element={<Test2 />} />
-          <Route path="/test3" element={<Test3 />} />
-          <Route path="/test4" element={<Test4 />} />
-          <Route path="/liquorCabinet" element={
-            <LiquorCabinet
-              allIngredient={allIngredient} setAllIngredient={setAllIngredient}
-              allRecipe={allRecipe} setAllRecipe={setAllRecipe}
-              ingredient={ingredient} setIngredient={setIngredient}
-              allRecipeIng={allRecipeIng} setAllRecipeIng={setAllRecipeIng}
-            />} />
 
-        </Routes>
-      </BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Main
+          allIngredient={allIngredient} setAllIngredient={setAllIngredient}
+          allRecipe={allRecipe} setAllRecipe={setAllRecipe}
+          ingredient={ingredient} setIngredient={setIngredient}
+          allRecipeIng={allRecipeIng} setAllRecipeIng={setAllRecipeIng} />} />
+        <Route path="/home/*" element={<Test1 allIngredient={allIngredient} setAllIngredient={setAllIngredient}
+          allRecipe={allRecipe} setAllRecipe={setAllRecipe}
+          ingredient={ingredient} setIngredient={setIngredient}
+          allRecipeIng={allRecipeIng} setAllRecipeIng={setAllRecipeIng} />} />
+        <Route path="/test2" element={<Test2 />} />
+        <Route path="/test3" element={<Test3 />} />
+        <Route path="/test4" element={<Test4 />} />
+        <Route path="/liquorCabinet" element={
+          <LiquorCabinet
+            allIngredient={allIngredient} setAllIngredient={setAllIngredient}
+            allRecipe={allRecipe} setAllRecipe={setAllRecipe}
+            ingredient={ingredient} setIngredient={setIngredient}
+            allRecipeIng={allRecipeIng} setAllRecipeIng={setAllRecipeIng}
+          />} />
+
+      </Routes>
+
     </div>
   );
 }

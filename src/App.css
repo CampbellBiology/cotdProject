@@ -2,6 +2,27 @@
   text-align: center;
 }
 
+A:link {
+  text-decoration: none;
+}
+
+A:visited {
+  text-decoration: none;
+}
+
+A:active {
+  text-decoration: none;
+}
+
+A:hover {
+  text-decoration: none;
+}
+
+A {
+  text-decoration: none;
+  color: inherit;
+}
+
 
 @import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
 
@@ -27,20 +48,23 @@
   font-weight: 400;
   src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamMedium.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamMedium.woff') format('woff');
 }
+
 @font-face {
   font-family: 'LotteMartDream';
   font-style: normal;
   font-weight: 700;
   src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamBold.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamBold.woff') format('woff');
 }
+
 @font-face {
   font-family: 'LotteMartDream';
   font-style: normal;
   font-weight: 300;
   src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamLight.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamLight.woff') format('woff');
 }
+
 .lottemartdream * {
- font-family: 'LotteMartDream', sans-serif;
+  font-family: 'LotteMartDream', sans-serif;
 }
 
 @font-face {
@@ -58,7 +82,7 @@
 }
 
 .lottemarthappy * {
- font-family: 'LotteMartHappy', sans-serif;
+  font-family: 'LotteMartHappy', sans-serif;
 }
 
 @font-face {

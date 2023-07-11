@@ -15,11 +15,6 @@ export const MostIncluded = ({ allRecipe, ingredient, allRecipeIng, setAllRecipe
     //추후 레시피-재료 테이블의 ingredient_index를 가진 recipe를 가져오기 위함임
     //map과 filter를 혼용해서 결과가 2차원 배열로 나옴
 
-
-    console.log(allRecipe)
-    console.log(ingredient)
-    console.log(allRecipeIng)
-
     useEffect(() => {
 
         const filteredItems123 = ingredient.map((item) => {
@@ -28,8 +23,6 @@ export const MostIncluded = ({ allRecipe, ingredient, allRecipeIng, setAllRecipe
         });
 
         setFilteredItems(filteredItems123.filter((item) => item.length !== 0));
-
-
 
         console.log(filteredItems)
 // eslint-disable-next-line
