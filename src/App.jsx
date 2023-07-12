@@ -3,7 +3,7 @@ import './App.css';
 import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Main } from './component/main/Main';
-import { Test1 } from './component/test1/Test1';
+import { Home } from './component/main/Home';
 import { Test2 } from './component/test2/Test2';
 import { Test3 } from './component/test3/Test3';
 import { Test4 } from './component/test4/Test4';
@@ -82,7 +82,7 @@ function App() {
           allRecipe={allRecipe} setAllRecipe={setAllRecipe}
           ingredient={ingredient} setIngredient={setIngredient}
           allRecipeIng={allRecipeIng} setAllRecipeIng={setAllRecipeIng} />} />
-        <Route path="/home/*" element={<Test1 allIngredient={allIngredient} setAllIngredient={setAllIngredient}
+        <Route path="/home/*" element={<Home allIngredient={allIngredient} setAllIngredient={setAllIngredient}
           allRecipe={allRecipe} setAllRecipe={setAllRecipe}
           ingredient={ingredient} setIngredient={setIngredient}
           allRecipeIng={allRecipeIng} setAllRecipeIng={setAllRecipeIng} />} />

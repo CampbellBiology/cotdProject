@@ -95,7 +95,7 @@ const AutoSearchData = styled.li`
 
 
 
-export const SearchRecipe = ({ allRecipe, setAllRecipe, allRecipeIng, setAllRecipeIng, searchTag, setSearchTag, allIngredient, setAllIngredient, deleteItem, recipeList, setRecipeList, TmpRecipeList }) => {
+export const SearchRecipe = ({ allRecipe, setAllRecipe, allRecipeIng, setAllRecipeIng, searchTag, setSearchTag, allIngredient, setAllIngredient, deleteItem}) => {
     //let keyword;
     //let imgPath ="안녕"
     //const user_id = "master"
@@ -163,25 +163,9 @@ export const SearchRecipe = ({ allRecipe, setAllRecipe, allRecipeIng, setAllReci
             //item add해주기
             // 깊은 복사하고(...ingredient) 새로 넣어주기
             setSearchTag([...searchTag, addingItem])
-            TmpRecipeList();
+            //newList(addingItem)
             console.log(addingItem)
 
-
-            //DB에 넣기
-            //   if (user_id !== null && result[0] == null) {
-            //     axios({
-            //       url: "/api/myRecipeAdd",
-            //       method: 'post',
-            //       data: { user_id: user_id, recipe_index: keyword }
-            //     })
-            //       .then(function a(response) {
-            //         console.log(response)
-            //       })
-            //       .catch(function (error) {
-            //         console.log(error);
-            //       });
-            //   }
-            // } else { alert("중복된 레시피입니다.") 
         }
 
         console.log(result)
@@ -197,24 +181,6 @@ export const SearchRecipe = ({ allRecipe, setAllRecipe, allRecipeIng, setAllReci
         }
         setAutoChk(true);
     }
-
-
-
-    //onKeyUp일 때
-    // const onSubmitSearch = (e) => {
-    //   setKeyword(e.target.value)
-    //   //keyword = (e.target.value);
-    //   if (e.key === "Enter") {
-
-    //     if (keyItems.length !== 0) {
-    //       setKeyword(keyItems[0].ingredient_name);
-    //       setKeyItems([]);
-    //       setIndex(-1);
-    //       addItem(keyItems[0].ingredient_name);
-    //       setKeyword('');
-    //     }
-    //   }
-    // }
 
     console.log('인덱스' + index)
 
@@ -308,6 +274,10 @@ export const SearchRecipe = ({ allRecipe, setAllRecipe, allRecipeIng, setAllReci
     }, [keyword, isTyping]);
 
 
+
+    
+
+
     return (
         <SearchContainer
             id={styles.search}
@@ -345,14 +315,9 @@ export const SearchRecipe = ({ allRecipe, setAllRecipe, allRecipeIng, setAllReci
                                     setKeyword(search.ingredient_name);
                                     setKeyItems([]);
                                     setIndex(-1);
-                                    // setHasText(false);
-                                    // addItem(options[0]);
-                                    addItem(search.ingredient_name);
-                                    //tmpRecipeList();
-                                    // setInputValue('');
+                                    addItem(search.ingredient_name);                  
                                     setKeyword('');
-                                }}
-                            >
+                                }}>
                                 {search.ingredient_name}
                                 <img src="/favicon.ico" alt="arrowIcon" />
                             </AutoSearchData>
@@ -360,7 +325,6 @@ export const SearchRecipe = ({ allRecipe, setAllRecipe, allRecipeIng, setAllReci
                     </AutoSearchWrap>
                 </AutoSearchContainer>
             )}
-
 
         </SearchContainer>
     );

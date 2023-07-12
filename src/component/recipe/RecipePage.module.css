@@ -26,6 +26,7 @@
     color: rgb(49, 25, 25);
     margin-top: 100px;
     margin-right: 20px;
+    cursor: pointer;
 }
 
 .like {
@@ -35,6 +36,7 @@
     color: rgb(49, 25, 25);
     margin-top: 100px;
     margin-right: 20px;
+    cursor: pointer;
 }
 
 .view {
@@ -43,6 +45,7 @@
     font-weight: 400;
     color: rgb(49, 25, 25);
     margin-top: 100px;
+    cursor: pointer;
 }
 
 .SearchRecipe{
