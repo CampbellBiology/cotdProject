@@ -45,3 +45,28 @@
     transform: scale(1.02);
   }
 }
+
+
+
+
+/* 재료별 스타일 */
+
+.Spirit {
+  color : rgb(207, 85, 37);
+}
+
+.Liqueur {
+  color : lightgreen;
+}
+
+.SubIngredient {
+  color : lightcoral;
+}
+
+.Drink {
+  color : lightseagreen;
+}
+
+.else {
+  color: gray;
+}

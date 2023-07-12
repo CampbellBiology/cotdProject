@@ -46,7 +46,7 @@ function App() {
     });
   }, []);
 
-  console.log(allRecipeIng)
+  //console.log(allRecipeIng)
 
 
 

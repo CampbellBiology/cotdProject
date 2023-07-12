@@ -64,10 +64,19 @@ const AutoSearchContainer = styled.div`
   top: 45px;
   border: 2px solid;
   padding: 15px;
+
+  //스크롤바 커스텀해주세요
+  //https://gurtn.tistory.com/120
+  height: auto;
+  max-height : 500px;
+  overflow-y: scroll;
+  overflow-x: hidden;
 `;
 
 // AutoSearchWrap 컴포넌트 스타일 정의
-const AutoSearchWrap = styled.ul``;
+const AutoSearchWrap = styled.ul`
+
+`;
 
 // AutoSearchData 컴포넌트 스타일 정의
 const AutoSearchData = styled.li`
@@ -95,12 +104,10 @@ const AutoSearchData = styled.li`
 
 
 
-export const SearchRecipe = ({ allRecipe, setAllRecipe, allRecipeIng, setAllRecipeIng, searchTag, setSearchTag, allIngredient, setAllIngredient, deleteItem}) => {
+export const SearchRecipe = ({ allRecipe, setAllRecipe, allRecipeIng, setAllRecipeIng, searchTag, setSearchTag, allIngredient, setAllIngredient, deleteItem }) => {
     //let keyword;
     //let imgPath ="안녕"
     //const user_id = "master"
-
-
 
     const [autoChk, setAutoChk] = useState(false);
 
@@ -249,9 +256,11 @@ export const SearchRecipe = ({ allRecipe, setAllRecipe, allRecipeIng, setAllReci
         );
 
         //10개까지만 보여줘요
-        const slicedData = filteredData.slice(0, 10);
+        //const slicedData = filteredData.slice(0, 10);
         //길이순 정렬 ex) 체리, 체리 리큐르, 마라스키노 체리
-        const lengthArr = slicedData.sort((x, y) => x.ingredient_name.length - y.ingredient_name.length)
+        //const lengthArr = slicedData.sort((x, y) => x.ingredient_name.length - y.ingredient_name.length)
+
+        const lengthArr = filteredData.sort((x, y) => x.ingredient_name.length - y.ingredient_name.length)
         //console.log(lengthArr)
 
         setKeyItems(lengthArr);
@@ -274,8 +283,20 @@ export const SearchRecipe = ({ allRecipe, setAllRecipe, allRecipeIng, setAllReci
     }, [keyword, isTyping]);
 
 
-
     
+    //showAll()에서 focus 주기위한 useRef 선언
+    const ingredientInput = useRef();
+
+    //이미지 클릭하면 재료 리스트 전체보기
+    const showAll = () => {
+       
+        const filteredData = allIngredient.filter(item => item.ingredient_name);       
+        setKeyItems(filteredData);
+        setIndex(0)
+        setKeyword(' ');
+        ingredientInput.current.focus();
+    }
+
 
 
     return (
@@ -300,8 +321,9 @@ export const SearchRecipe = ({ allRecipe, setAllRecipe, allRecipeIng, setAllReci
                     value={keyword}
                     onChange={handleInputChange}
                     onKeyDown={handleKeyArrow}
+                    ref={ingredientInput}
                 />
-                <img src="/favicon.ico" alt="arrowIcon" style={{ width: '30px' }} />
+                <img src="/favicon.ico" onClick={() => showAll()} alt="arrowIcon" style={{ width: '30px' }} />
             </SearchComponent>
 
             {keyItems.length > 0 && keyword && (
@@ -315,7 +337,7 @@ export const SearchRecipe = ({ allRecipe, setAllRecipe, allRecipeIng, setAllReci
                                     setKeyword(search.ingredient_name);
                                     setKeyItems([]);
                                     setIndex(-1);
-                                    addItem(search.ingredient_name);                  
+                                    addItem(search.ingredient_name);
                                     setKeyword('');
                                 }}>
                                 {search.ingredient_name}
