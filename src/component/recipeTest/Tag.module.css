@@ -19,14 +19,13 @@
     z-index: 3;
     text-align: center;
     display: inline-block;
-    font-size: 14px;
 }
 
 
 
 .deleteBtn {
     left: 5.5rem;
-    width: 40px;
+    width: 3rem;
     height: 100%;
     background: rgba(255, 255, 255, 0.842);
     border-radius: 15px;

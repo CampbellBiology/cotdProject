@@ -3,13 +3,13 @@ import './App.css';
 import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Main } from './component/main/Main';
-import { Test1 } from './component/test1/Test1';
-import { Test2 } from './component/test2/Test2';
+import { Home } from './component/home/Home';
+import { WikiPage } from './component/wiki/WikiPage';
 import { Test3 } from './component/test3/Test3';
-import { Test4 } from './component/test4/Test4';
+import { RecipeDetail } from './component/RecipeDetail/RecipeDetail';
 import { LiquorCabinet } from './component/liquorCabinet/LiquorCabinet';
 import axios from 'axios';
-
+import { Header } from './component/header/Header';
 
 function App() {
 
@@ -71,24 +71,39 @@ function App() {
     }
   }, [setIngredient]);
 
+  //히스토리
+  const [history, setHistory] = useState([]);
+
+  useEffect(() => {
+    axios.get("/api/getHistory").then((data) => {
+      //history에 담기
+      setHistory(data.data);
+    });
+  }, []);
+
 
   return (
     <div className="App">
 
-
+      <Header />
       <Routes>
         <Route path="/" element={<Main
           allIngredient={allIngredient} setAllIngredient={setAllIngredient}
           allRecipe={allRecipe} setAllRecipe={setAllRecipe}
           ingredient={ingredient} setIngredient={setIngredient}
-          allRecipeIng={allRecipeIng} setAllRecipeIng={setAllRecipeIng} />} />
-        <Route path="/home/*" element={<Test1 allIngredient={allIngredient} setAllIngredient={setAllIngredient}
+          allRecipeIng={allRecipeIng} setAllRecipeIng={setAllRecipeIng} />}
+          history={history} setHistory={setHistory} />
+        <Route path="/home/*" element={<Home allIngredient={allIngredient} setAllIngredient={setAllIngredient}
+          allRecipe={allRecipe} setAllRecipe={setAllRecipe}
+          ingredient={ingredient} setIngredient={setIngredient}
+          allRecipeIng={allRecipeIng} setAllRecipeIng={setAllRecipeIng}
+          history={history} setHistory={setHistory} />} />
+        <Route path="/test2" element={<WikiPage />} />
+        <Route path="/test3" element={<Test3 />} />
+        <Route path="/recipe/:recipe_index" element={<RecipeDetail allIngredient={allIngredient} setAllIngredient={setAllIngredient}
           allRecipe={allRecipe} setAllRecipe={setAllRecipe}
           ingredient={ingredient} setIngredient={setIngredient}
           allRecipeIng={allRecipeIng} setAllRecipeIng={setAllRecipeIng} />} />
-        <Route path="/test2" element={<Test2 />} />
-        <Route path="/test3" element={<Test3 />} />
-        <Route path="/test4" element={<Test4 />} />
         <Route path="/liquorCabinet" element={
           <LiquorCabinet
             allIngredient={allIngredient} setAllIngredient={setAllIngredient}

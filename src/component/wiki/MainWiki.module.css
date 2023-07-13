@@ -1,3 +1,5 @@
+
+
 .recipe_image {
   width: 250px;
   height: 200px;
@@ -44,35 +46,4 @@
   2% {
     transform: scale(1.02);
   }
-}
-
-
-
-
-/* 재료별 스타일 */
-
-.Spirit {
-  color : white;
-  font-size: 20px;
-  text-align: left;
-  margin-top: 10px;
-  background-color: #ff9090;
-  padding: 5px 20px 5px 20px;
-  border-radius: 20px;
-}
-
-.Liqueur {
-  color : lightgreen;
-}
-
-.SubIngredient {
-  color : lightcoral;
-}
-
-.Drink {
-  color : lightseagreen;
-}
-
-.else {
-  color: gray;
 }

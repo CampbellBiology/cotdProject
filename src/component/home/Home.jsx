@@ -7,7 +7,7 @@ import { RecipePage } from '../recipe/RecipePage';
 import { LiquorCabinet } from '../liquorCabinet/LiquorCabinet';
 import { History } from '../liquorCabinet/Static/History';
 
-export const Main = ({ allIngredient, setAllIngredient, allRecipe, setAllRecipe, ingredient, setIngredient, allRecipeIng, setAllRecipeIng, 
+export const Home = ({ allIngredient, setAllIngredient, allRecipe, setAllRecipe, ingredient, setIngredient, allRecipeIng, setAllRecipeIng, 
   history, setHistory }) => {
 
     const [searchTag, setSearchTag] = useState([]);
@@ -18,7 +18,7 @@ export const Main = ({ allIngredient, setAllIngredient, allRecipe, setAllRecipe,
       <AnimatePresence>
         <Routes>
           {/* 1- RecipePage */}
-          <Route path="/" element={<RecipePage
+          <Route path="/recipe" element={<RecipePage
             allIngredient={allIngredient} setAllIngredient={setAllIngredient}
             allRecipe={allRecipe} setAllRecipe={setAllRecipe}
             ingredient={ingredient} setIngredient={setIngredient}
@@ -36,11 +36,9 @@ export const Main = ({ allIngredient, setAllIngredient, allRecipe, setAllRecipe,
               allRecipeIng={allRecipeIng} setAllRecipeIng={setAllRecipeIng}
             />} />
 
-
-       {/* 4- History */}
           <Route path="/history" element={<History history={history} setHistory={setHistory} />} />
 
-          {/* 5- MyPage */}
+          {/* 4- MyPage */}
           <Route path="/MyPage" element={<WikiPage allRecipe={allRecipe} setAllRecipe={setAllRecipe} />} />
         </Routes>
       </AnimatePresence>

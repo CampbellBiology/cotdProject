@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  font-family: LotteMartDream;
+  font-weight: 400;
 }
 
 A:link {
@@ -22,6 +24,17 @@ A {
   text-decoration: none;
   color: inherit;
 }
+
+body {
+  -ms-overflow-style: none;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+
+
 
 
 @import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');

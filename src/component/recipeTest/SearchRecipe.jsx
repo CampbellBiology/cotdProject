@@ -7,10 +7,13 @@ import { Tag } from './Tag';
 
 
 const SearchContainer = styled.div`
+
   width: 1060px;
   height: 45px;
   position: relative;
   border: 0;
+  margin-left : -10px;
+  
   img {
     position: absolute;
     right: 10px;
@@ -20,18 +23,19 @@ const SearchContainer = styled.div`
 
 //SearchComponent가 searchTagContainer와 Search를 포함함
 const SearchComponent = styled.div`
+
   width: 1000px;
   height: 45px;
   position: absolute;
   border: 0;
-
   padding-left: 10px;
   background-color: #eaeaea;
   width: 100%;
   height: 100%;
   outline: none;
+  border-radius: 10px;
+  text-align: left;
 
-text-align: left;
  
 `;
 
@@ -51,11 +55,15 @@ const Search = styled.input`
   padding-left: 10px;
   width: 20rem;
   height: 100%; 
-
+  font-family: 'LotteMartDream';
+  font-size: 16px;
+  font-weight: 300;
+  color: rgb(194, 194, 194);
 `;
 
 // AutoSearchContainer 컴포넌트 스타일 정의
 const AutoSearchContainer = styled.div`
+
   z-index: 20;
   height: 50vh;
   width: 400px;
@@ -64,19 +72,10 @@ const AutoSearchContainer = styled.div`
   top: 45px;
   border: 2px solid;
   padding: 15px;
-
-  //스크롤바 커스텀해주세요
-  //https://gurtn.tistory.com/120
-  height: auto;
-  max-height : 500px;
-  overflow-y: scroll;
-  overflow-x: hidden;
 `;
 
 // AutoSearchWrap 컴포넌트 스타일 정의
-const AutoSearchWrap = styled.ul`
-
-`;
+const AutoSearchWrap = styled.ul``;
 
 // AutoSearchData 컴포넌트 스타일 정의
 const AutoSearchData = styled.li`
@@ -104,10 +103,12 @@ const AutoSearchData = styled.li`
 
 
 
-export const SearchRecipe = ({ allRecipe, setAllRecipe, allRecipeIng, setAllRecipeIng, searchTag, setSearchTag, allIngredient, setAllIngredient, deleteItem }) => {
+export const SearchRecipe = ({ allRecipe, setAllRecipe, allRecipeIng, setAllRecipeIng, searchTag, setSearchTag, allIngredient, setAllIngredient, deleteItem, recipeList, setRecipeList, TmpRecipeList }) => {
     //let keyword;
     //let imgPath ="안녕"
     //const user_id = "master"
+
+
 
     const [autoChk, setAutoChk] = useState(false);
 
@@ -170,9 +171,25 @@ export const SearchRecipe = ({ allRecipe, setAllRecipe, allRecipeIng, setAllReci
             //item add해주기
             // 깊은 복사하고(...ingredient) 새로 넣어주기
             setSearchTag([...searchTag, addingItem])
-            //newList(addingItem)
+            TmpRecipeList();
             console.log(addingItem)
 
+
+            //DB에 넣기
+            //   if (user_id !== null && result[0] == null) {
+            //     axios({
+            //       url: "/api/myRecipeAdd",
+            //       method: 'post',
+            //       data: { user_id: user_id, recipe_index: keyword }
+            //     })
+            //       .then(function a(response) {
+            //         console.log(response)
+            //       })
+            //       .catch(function (error) {
+            //         console.log(error);
+            //       });
+            //   }
+            // } else { alert("중복된 레시피입니다.") 
         }
 
         console.log(result)
@@ -188,6 +205,24 @@ export const SearchRecipe = ({ allRecipe, setAllRecipe, allRecipeIng, setAllReci
         }
         setAutoChk(true);
     }
+
+
+
+    //onKeyUp일 때
+    // const onSubmitSearch = (e) => {
+    //   setKeyword(e.target.value)
+    //   //keyword = (e.target.value);
+    //   if (e.key === "Enter") {
+
+    //     if (keyItems.length !== 0) {
+    //       setKeyword(keyItems[0].ingredient_name);
+    //       setKeyItems([]);
+    //       setIndex(-1);
+    //       addItem(keyItems[0].ingredient_name);
+    //       setKeyword('');
+    //     }
+    //   }
+    // }
 
     console.log('인덱스' + index)
 
@@ -256,11 +291,9 @@ export const SearchRecipe = ({ allRecipe, setAllRecipe, allRecipeIng, setAllReci
         );
 
         //10개까지만 보여줘요
-        //const slicedData = filteredData.slice(0, 10);
+        const slicedData = filteredData.slice(0, 10);
         //길이순 정렬 ex) 체리, 체리 리큐르, 마라스키노 체리
-        //const lengthArr = slicedData.sort((x, y) => x.ingredient_name.length - y.ingredient_name.length)
-
-        const lengthArr = filteredData.sort((x, y) => x.ingredient_name.length - y.ingredient_name.length)
+        const lengthArr = slicedData.sort((x, y) => x.ingredient_name.length - y.ingredient_name.length)
         //console.log(lengthArr)
 
         setKeyItems(lengthArr);
@@ -281,22 +314,6 @@ export const SearchRecipe = ({ allRecipe, setAllRecipe, allRecipeIng, setAllReci
         return () => clearTimeout(typingTimer);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [keyword, isTyping]);
-
-
-    
-    //showAll()에서 focus 주기위한 useRef 선언
-    const ingredientInput = useRef();
-
-    //이미지 클릭하면 재료 리스트 전체보기
-    const showAll = () => {
-       
-        const filteredData = allIngredient.filter(item => item.ingredient_name);       
-        setKeyItems(filteredData);
-        setIndex(0)
-        setKeyword(' ');
-        ingredientInput.current.focus();
-    }
-
 
 
     return (
@@ -321,9 +338,8 @@ export const SearchRecipe = ({ allRecipe, setAllRecipe, allRecipeIng, setAllReci
                     value={keyword}
                     onChange={handleInputChange}
                     onKeyDown={handleKeyArrow}
-                    ref={ingredientInput}
                 />
-                <img src="/favicon.ico" onClick={() => showAll()} alt="arrowIcon" style={{ width: '30px' }} />
+                <img src="/favicon.ico" alt="arrowIcon" style={{ width: '30px' }} />
             </SearchComponent>
 
             {keyItems.length > 0 && keyword && (
@@ -337,9 +353,14 @@ export const SearchRecipe = ({ allRecipe, setAllRecipe, allRecipeIng, setAllReci
                                     setKeyword(search.ingredient_name);
                                     setKeyItems([]);
                                     setIndex(-1);
+                                    // setHasText(false);
+                                    // addItem(options[0]);
                                     addItem(search.ingredient_name);
+                                    //tmpRecipeList();
+                                    // setInputValue('');
                                     setKeyword('');
-                                }}>
+                                }}
+                            >
                                 {search.ingredient_name}
                                 <img src="/favicon.ico" alt="arrowIcon" />
                             </AutoSearchData>
@@ -347,6 +368,7 @@ export const SearchRecipe = ({ allRecipe, setAllRecipe, allRecipeIng, setAllReci
                     </AutoSearchWrap>
                 </AutoSearchContainer>
             )}
+
 
         </SearchContainer>
     );
