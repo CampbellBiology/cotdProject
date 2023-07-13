@@ -1,29 +1,22 @@
 
-<<<<<<< HEAD
-=======
-import styles from "./Main.module.css";
->>>>>>> f64be7bcd89e06d4c596b768b2b6bb6fac157856
+import styles from "./Home.module.css";
 import React, { useState } from 'react';
 import { AnimatePresence } from "framer-motion";
-import { Route, Routes } from 'react-router-dom';
-import { WikiPage } from '../wiki/WikiPage';
+import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Test2 } from '../test2/Test2';
 import { RecipePage } from '../recipe/RecipePage';
 import { LiquorCabinet } from '../liquorCabinet/LiquorCabinet';
-<<<<<<< HEAD
-import { History } from '../liquorCabinet/Static/History';
-=======
 import { History } from '../history/History';
 import { Test4 } from '../test4/Test4';
 
 
-export const Main = ({ allIngredient, setAllIngredient, allRecipe, setAllRecipe, ingredient, setIngredient, allRecipeIng, setAllRecipeIng,
+export const Home = ({ allIngredient, setAllIngredient, allRecipe, setAllRecipe, ingredient, setIngredient, allRecipeIng, setAllRecipeIng, 
   history, setHistory }) => {
 
   const navigate = useNavigate();
-
   const [searchTag, setSearchTag] = useState([]);
 
-  // 페이지 이동
+  //페이지 이동
   const btnClick = (e) => {
 
     switch (e) {
@@ -57,18 +50,11 @@ export const Main = ({ allIngredient, setAllIngredient, allRecipe, setAllRecipe,
     }
 
   }
->>>>>>> f64be7bcd89e06d4c596b768b2b6bb6fac157856
 
-export const Main = ({ allIngredient, setAllIngredient, allRecipe, setAllRecipe, ingredient, setIngredient, allRecipeIng, setAllRecipeIng, 
-  history, setHistory }) => {
 
-    const [searchTag, setSearchTag] = useState([]);
-  
   return (
     <>
 
-<<<<<<< HEAD
-=======
       <div className={styles.sign}>
         <span>로그인</span>
         <span> ㅣ </span>
@@ -88,7 +74,7 @@ export const Main = ({ allIngredient, setAllIngredient, allRecipe, setAllRecipe,
       </div>
 
 
-      {/* 페이지 이동 */}
+      {/* 4. 각 페이지 이동 */}
       <div className={styles.flexBox}>
         <div className={styles.recipeBtn} onClick={() => btnClick('recipe')} >
           <img src="/1.png" alt="recipe" />
@@ -113,22 +99,17 @@ export const Main = ({ allIngredient, setAllIngredient, allRecipe, setAllRecipe,
       </div>
 
 
->>>>>>> f64be7bcd89e06d4c596b768b2b6bb6fac157856
       <AnimatePresence>
         <Routes>
           {/* 1- RecipePage */}
-          <Route path="/" element={<RecipePage
+          <Route path="/recipe" element={<RecipePage
             allIngredient={allIngredient} setAllIngredient={setAllIngredient}
             allRecipe={allRecipe} setAllRecipe={setAllRecipe}
             ingredient={ingredient} setIngredient={setIngredient}
             allRecipeIng={allRecipeIng} setAllRecipeIng={setAllRecipeIng}
             searchTag={searchTag} setSearchTag={setSearchTag} />} />
           {/* 2- Wiki */}
-<<<<<<< HEAD
-          <Route path="/wiki" element={<WikiPage allRecipe={allRecipe} setAllRecipe={setAllRecipe} />} />
-=======
           <Route path="/wiki" element={<Test2 allRecipe={allRecipe} setAllRecipe={setAllRecipe} />} />
->>>>>>> f64be7bcd89e06d4c596b768b2b6bb6fac157856
 
           {/* 3- LiquorCabinet */}
           <Route path="/cabinet" element={
@@ -138,21 +119,11 @@ export const Main = ({ allIngredient, setAllIngredient, allRecipe, setAllRecipe,
               ingredient={ingredient} setIngredient={setIngredient}
               allRecipeIng={allRecipeIng} setAllRecipeIng={setAllRecipeIng}
             />} />
-
-<<<<<<< HEAD
-
-       {/* 4- History */}
-          <Route path="/history" element={<History history={history} setHistory={setHistory} />} />
-
-          {/* 5- MyPage */}
-          <Route path="/MyPage" element={<WikiPage allRecipe={allRecipe} setAllRecipe={setAllRecipe} />} />
-=======
           {/* 4- History */}
           <Route path="/history" element={<History history={history} setHistory={setHistory} />} />
 
           {/* 5- MyPage */}
           <Route path="/mypage" element={<Test4 allRecipe={allRecipe} setAllRecipe={setAllRecipe} />} />
->>>>>>> f64be7bcd89e06d4c596b768b2b6bb6fac157856
         </Routes>
       </AnimatePresence>
 

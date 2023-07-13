@@ -72,12 +72,25 @@ export const SearchBox = ({ ingredient, setIngredient, allIngredient, setAllIngr
 
   const [autoChk, setAutoChk] = useState(false);
 
-  const deselectedOptions = [];
+
+  //allIngredient 중에 부재료 등 제외하고 sprit, liqueur 등만 포함
+  console.log(allIngredient)
+
+
+  //리스트끼리 비교~~~ 해서 allIngredient중에 과일, 얼음, 쥬스, 부재료, 민트 제외하고 남김
+  // tempA.filter((item) => tempB.some((i) => i.name === item.name))
+  const filteringIng = [{ ingredient_category: '과일' }, { ingredient_category: '얼음' }, { ingredient_category: '쥬스' }, { ingredient_category: '부재료' }, { ingredient_category: '민트' },]
+  const Liquors = allIngredient.filter((item) => !filteringIng.some((i) => i.ingredient_category === item.ingredient_category))
+
+  console.log(Liquors)
 
   //Object.keys 주어진 객체의 속성 이름들을 일반적인 반복문과 동일한 순서로 순회되는 열거할 수 있는 배열로 반환함
   //배열의 key값만 가져와서 배열로 만듦
-  for (const key in Object.keys(allIngredient)) {
-    deselectedOptions[key] = (allIngredient[key].ingredient_name);
+  //AllIngredient의 ingredient_name으로만 이루어진 배열
+  const deselectedOptions = [];
+
+  for (const key in Object.keys(Liquors)) {
+    deselectedOptions[key] = (Liquors[key].ingredient_name);
   }
 
 
@@ -214,7 +227,7 @@ export const SearchBox = ({ ingredient, setIngredient, allIngredient, setAllIngr
               setIndex(-1);
               addItem(keyItems[index].ingredient_name);
               setKeyword('');
-            } 
+            }
 
           } else {
             setKeyword(keyItems[0].ingredient_name);
@@ -228,7 +241,7 @@ export const SearchBox = ({ ingredient, setIngredient, allIngredient, setAllIngr
           // 디폴트 키입력은 없어요
           break;
       }
-    } 
+    }
     //자동 완성 결과가 생기기 전에
     else if (e.key === 'Enter') {
       if (keyword === null || keyword === "" || keyword === '' || keyword === undefined) {
@@ -244,7 +257,7 @@ export const SearchBox = ({ ingredient, setIngredient, allIngredient, setAllIngr
 
 
     //allIngredient를 인풋창 value로 필터해요
-    const res = await allIngredient;
+    const res = await Liquors;
     const filteredData = res.filter((item) =>
       (item.ingredient_name.replace(" ", "")).includes(keyword.replace(" ", ""))
     );

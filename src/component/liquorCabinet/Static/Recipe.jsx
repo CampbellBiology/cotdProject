@@ -32,7 +32,7 @@ export const Recipe = ({ allRecipe, allRecipeIng, priorityNumber, recommendedRec
 
     let timeString = year + '-' + month + '-' + day + " " + hours + ':' + minutes + ':' + seconds;
 
-    console.log(timeString);
+    //console.log(timeString);
 
     const addHistory = () => {
 
@@ -43,7 +43,7 @@ export const Recipe = ({ allRecipe, allRecipeIng, priorityNumber, recommendedRec
 
         setHistory([newHistory, ...history])
 
-        console.log(history)
+        //console.log(history)
 
         //DB에 넣기
         if (user_id !== null) {
@@ -62,7 +62,7 @@ export const Recipe = ({ allRecipe, allRecipeIng, priorityNumber, recommendedRec
         }
     }
 
-console.log(allRecipe)
+//console.log(allRecipe)
 
     return (
         <div className={styles.background}>

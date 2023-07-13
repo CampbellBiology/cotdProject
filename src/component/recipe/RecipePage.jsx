@@ -29,6 +29,45 @@ export const RecipePage = ({ allIngredient, setAllIngredient, allRecipe, setAllR
   const [recipeList, setRecipeList] = useState([]);
 
 
+<<<<<<< HEAD
+=======
+  // useEffect(() => {
+  //   setRecipeList([...allRecipe])
+
+  // }, [allRecipe]);
+
+  // const newList = (newTag) => {
+  //   console.log(newTag)
+
+  //   let filteredIng = allRecipeIng.filter((item) => item.ingredient_name === newTag.ingredient_name);
+  //   console.log(filteredIng)
+  //   //let filterRecipe = allRecipe.filter((item) => item.recipe_index === filteredIng.recipe_index);
+
+  //   const filterRecipe = filteredIng.map((item) => {
+  //     const filtered = allRecipe.filter((compareItem) => item.recipe_index === compareItem.recipe_index);
+  //     console.log(filtered)
+  //     return filtered
+  //   })
+
+  //   console.log(allRecipe)
+  //   console.log(filterRecipe)
+
+  //   //2차원 배열 1차원으로 만들기
+  //   let to1chawon = [];
+  //   filterRecipe.filter((item) => item.length !== 0).forEach((element) => {
+  //     to1chawon = to1chawon.concat(element);
+  //   })
+
+  //   console.log(to1chawon);
+
+
+  //   setRecipeList(to1chawon);
+  // }
+
+
+
+
+>>>>>>> f64be7bcd89e06d4c596b768b2b6bb6fac157856
   useEffect(() => {
     console.log(searchTag)
 
@@ -97,12 +136,21 @@ export const RecipePage = ({ allIngredient, setAllIngredient, allRecipe, setAllR
 
       console.log(filteredArrRecipe)
 
+<<<<<<< HEAD
       //2차원 배열이므로 1차원으로 변경 3트째 // 3트요 ?
       let ArrRecipeTo1chawon = [];
       filteredArrRecipe.forEach((element) => {
         ArrRecipeTo1chawon = ArrRecipeTo1chawon.concat(element);
       })
       console.log(ArrRecipeTo1chawon);
+=======
+            //2차원 배열이므로 1차원으로 변경 3트째
+            let ArrRecipeTo1chawon = [];
+            filteredArrRecipe.forEach((element) => {
+              ArrRecipeTo1chawon = ArrRecipeTo1chawon.concat(element);
+            })
+            console.log(ArrRecipeTo1chawon);
+>>>>>>> f64be7bcd89e06d4c596b768b2b6bb6fac157856
 
       setRecipeList(ArrRecipeTo1chawon);
     }
@@ -164,7 +212,11 @@ export const RecipePage = ({ allIngredient, setAllIngredient, allRecipe, setAllR
       {/* 2. 레시피 리스트 */}
       <div className={styles.flex_wrap}>
         {recipeList.map((item) => {
+<<<<<<< HEAD
           return (<MainRecipe recipe={item} searchTag={searchTag} allRecipe={allRecipe} allRecipeIng={allRecipeIng} key={item.recipe_index} />)
+=======
+          return (<MainRecipe recipe={item} searchTag = {searchTag} allRecipe={allRecipe} allRecipeIng={allRecipeIng} key={item.recipe_index}/>)
+>>>>>>> f64be7bcd89e06d4c596b768b2b6bb6fac157856
         }
         )}
       </div>
