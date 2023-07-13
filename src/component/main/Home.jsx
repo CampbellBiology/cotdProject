@@ -6,10 +6,12 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import { Test2 } from '../test2/Test2';
 import { RecipePage } from '../recipe/RecipePage';
 import { LiquorCabinet } from '../liquorCabinet/LiquorCabinet';
+import { History } from '../history/History';
 import { Test4 } from '../test4/Test4';
 
 
-export const Home = ({ allIngredient, setAllIngredient, allRecipe, setAllRecipe, ingredient, setIngredient, allRecipeIng, setAllRecipeIng }) => {
+export const Home = ({ allIngredient, setAllIngredient, allRecipe, setAllRecipe, ingredient, setIngredient, allRecipeIng, setAllRecipeIng, 
+  history, setHistory }) => {
 
   const navigate = useNavigate();
   const [searchTag, setSearchTag] = useState([]);
@@ -31,6 +33,11 @@ export const Home = ({ allIngredient, setAllIngredient, allRecipe, setAllRecipe,
       case 'cabinet':
         navigate('/home/cabinet')
         console.log('술장으로 이동')
+        break;
+
+      case 'history':
+        navigate('/home/history')
+        console.log('히스토리로 이동')
         break;
 
       case 'info':
@@ -81,25 +88,29 @@ export const Home = ({ allIngredient, setAllIngredient, allRecipe, setAllRecipe,
           <img src="/3.png" alt="cabinet" />
         </div>
 
+        <div className={styles.cabinetBtn} onClick={() => btnClick('history')} >
+          <img src="/4.png" alt="history" />
+        </div>
+
         <div className={styles.infoBtn} onClick={() => btnClick('info')} >
-          <img src="/4.png" alt="info" />
+          <img src="/5.png" alt="info" />
         </div>
 
       </div>
 
 
-<AnimatePresence>
+      <AnimatePresence>
         <Routes>
           {/* 1- RecipePage */}
-          <Route path="/recipe" element={<RecipePage 
-                        allIngredient={allIngredient} setAllIngredient={setAllIngredient}
-                        allRecipe={allRecipe} setAllRecipe={setAllRecipe}
-                        ingredient={ingredient} setIngredient={setIngredient}
-                        allRecipeIng={allRecipeIng} setAllRecipeIng={setAllRecipeIng} 
-                        searchTag = {searchTag} setSearchTag = {setSearchTag}/>} />
+          <Route path="/recipe" element={<RecipePage
+            allIngredient={allIngredient} setAllIngredient={setAllIngredient}
+            allRecipe={allRecipe} setAllRecipe={setAllRecipe}
+            ingredient={ingredient} setIngredient={setIngredient}
+            allRecipeIng={allRecipeIng} setAllRecipeIng={setAllRecipeIng}
+            searchTag={searchTag} setSearchTag={setSearchTag} />} />
           {/* 2- Wiki */}
           <Route path="/wiki" element={<Test2 allRecipe={allRecipe} setAllRecipe={setAllRecipe} />} />
-          
+
           {/* 3- LiquorCabinet */}
           <Route path="/cabinet" element={
             <LiquorCabinet
@@ -108,8 +119,10 @@ export const Home = ({ allIngredient, setAllIngredient, allRecipe, setAllRecipe,
               ingredient={ingredient} setIngredient={setIngredient}
               allRecipeIng={allRecipeIng} setAllRecipeIng={setAllRecipeIng}
             />} />
+          {/* 4- History */}
+          <Route path="/history" element={<History history={history} setHistory={setHistory} />} />
 
-          {/* 4- MyPage */}
+          {/* 5- MyPage */}
           <Route path="/mypage" element={<Test4 allRecipe={allRecipe} setAllRecipe={setAllRecipe} />} />
         </Routes>
       </AnimatePresence>
